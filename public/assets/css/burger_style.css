@@ -1,0 +1,46 @@
+body {
+	background-color: #91250D;
+	color: #F5F425;
+	font-family: 'Josefin Sans', sans-serif;
+	text-align: center;
+	letter-spacing: 4px;
+}
+
+
+.label {
+  font-weight: bold;
+}
+
+.create-a-burger {
+  margin: 5px;
+  padding: 5px;
+}
+
+.form-group {
+  margin-bottom: 5px;
+}
+
+#availableBurger {
+	clear: both;
+	float:left;
+	width:45%;
+	margin-left: 5%;
+	overflow:hidden;
+}
+
+#eatenBurger {
+	float:right;
+	width:45%;
+	margin-right: 5%;
+	overflow:hidden;
+}
+
+#addABurger {
+	padding-top: 10px;
+	clear: both;
+}
+#image {
+	width: 90%;
+	margin-left: 5%;
+}
+

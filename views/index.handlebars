@@ -1,0 +1,59 @@
+<div id = "image">
+  <h1>Tarrentino's Burger Joint!</h1>
+
+  <img src="http://www.clipartkid.com/images/195/hamburger-clip-art-clipart-best-clipart-best-fN0kQA-clipart.png" width="150px">
+</div>
+
+
+<div id = "availableBurger" class="col-lg-4">
+
+<!--Burgers available to eat-->
+<h2>Want a burger? Click on Devour.</h2>
+
+  <ul style="list-style: none;"><li>
+    {{#each burgers}}
+      {{#unless this.devoured}}
+        <li>
+          {{this.burger_name}}
+
+          <form id = "eatMe" action="/{{this.id}}?_method=PUT" method="POST">
+            <input type="hidden" name="devoured" value="true" style="display: inline;">
+            <button type="submit" style="display: inline;">Devour!</button>
+          </form>
+
+         </li>
+      {{/unless}}
+    {{/each}}
+  </ul>
+</div>
+
+
+<!--All burgers that have been eaten-->
+<div id = "eatenBurger"class = ".col-lg-4">
+<h2>Burgers that Have Been Eaten</h2>
+
+<ul style="list-style: none;"><li>
+  {{#each burgers}}
+    {{#if this.devoured}}
+      <li>
+        {{this.burger_name}}
+
+      </li>
+    {{/if}}
+  {{/each}}
+</ul>
+</div>
+
+<!--Section to add burger-->
+<div id = "addABurger">
+<h2>Add a Burger - Enter the name of a burger you want to eat.</h2>
+<form class="create-a-burger" action="/" method="POST">
+
+  <div class="form-group">
+    <label for="ca">Burger Name:</label>
+    <input type="text" id="ca" name="name">
+  </div>
+
+  <button type="submit">Add Burger</button>
+</form>
+</div>
