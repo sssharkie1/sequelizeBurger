@@ -1,0 +1,17 @@
+
+{
+  "development": {
+    "username": "sstevens",
+    "password": "Larryland102!",
+    "database": "seqburger",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  },
+  "test": {
+    "username": "root",
+    "password": "Larryland102!",
+    "database": "seqburger",
+    "host": "127.0.0.1",
+    "dialect": "mysql"
+  }
+}

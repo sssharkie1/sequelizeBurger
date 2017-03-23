@@ -1,28 +1,51 @@
-var express = require("express");
-var bodyParser = require("body-parser");
-var methodOverride = require("method-override");
+// ==============================================================================
+// DEPENDENCIES
+// Series of npm packages that we will use to give our server useful functionality
+// ==============================================================================
 
-var port = 4000;
+var express = require('express');
+var bodyParser = require('body-parser');
+var path = require('path');
+var exphbs = require('express-handlebars');
+var methodOverride = require('method-override');
 
-var app = express();
+// ==============================================================================
+// EXPRESS CONFIGURATION
+// This sets up the basic properties for our express server 
+// ==============================================================================
 
-// Serve static content for the app from the "public" directory in the application directory.
-app.use(express.static(process.cwd() + "/public"));
+var app = express(); // Tells node that we are creating an "express" server
+var PORT = process.env.PORT || 3030; // Sets an initial port. We'll use this later in our listener
 
-app.use(bodyParser.urlencoded({ extended: false }));
+// BodyParser makes it easy for our server to interpret data sent to it.
+// The code below is pretty standard.
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.text());
+app.use(bodyParser.json({type:'application/vnd.api+json'}));
 
-// Override with POST having ?_method=DELETE
-app.use(methodOverride("_method"));
+//access to public files
+app.use(express.static(__dirname + '/public'));
+//using method-override
+app.use(methodOverride('_method'));
+//setting up handlebars
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
 
-// Set Handlebars.
-var exphbs = require("express-handlebars");
+// ================================================================================
+// ROUTER
+// The below points our server to a series of "route" files.
+// These routes give our server a "map" of how to respond when users visit or request data from various URLs. 
+// ================================================================================
 
-app.engine("handlebars", exphbs({ defaultLayout: "main" }));
-app.set("view engine", "handlebars");
+require('./routes/burger-routes.js')(app); 
+//require('./routes/burger-html-routes.js')(app);
 
-// Import routes and give the server access to them.
-var routes = require("./controllers/burgers_controller.js");
+// ==============================================================================
+// LISTENER
+// The below code effectively "starts" our server 
+// ==============================================================================
 
-app.use("/", routes);
-
-app.listen(port);
+app.listen(PORT, function() {
+	console.log("App listening on PORT: " + PORT);
+});
